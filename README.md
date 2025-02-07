@@ -19,8 +19,9 @@ Aim of NLP is to process text and speech to understand Human Language.
 * [Stemming](#stemming)
 * [Lemmatization](#lemmatization)
 * Spelling Correction
-* Bag of Words
-* TF/IDF
+* [Feature Extraction from Text Data](#feature-extraction-from-text-data)
+* [Bag of Words]
+* [TF/IDF]
 * Word Embeddings
 * Named Entity Recognition
 * Data Augmentation
@@ -29,6 +30,9 @@ Aim of NLP is to process text and speech to understand Human Language.
 * spaCy
 * gensim (Word2vec)
 * scikit-learn
+
+#### NLP Project
+[Twitter Semtiments](#twitter-sentiments)
 
 ## Vectorization
 Vectorization is a process of converting text data into numerical vectors that can be processed by machine learning algorithms. The raw data, a sequence of symbols cannot be fed directly to the algorithms themselves as most of them expect numerical feature vectors with a fixed size rather than the raw text documents with variable length.
@@ -96,5 +100,120 @@ from nltk import pos_tag
 pos_tag(['fighting'])
 #Output: [('fighting', 'VBG')]
 ```
+
+## Twitter Sentiments
+Twitter Sentiment analysis is a process of determining whether a tweet is positive or negative.
+
+Steps involved: 
+- Import Dataset.
+- Alter Dataset to keep only one Columns (i.e tweet)
+- Convert to lowercase
+- Removal of Punctuations
+- Removal of Stopwords
+- Removal of Frequent Words
+- Removal of Rare Words
+- Removal of Special characters
+- Stemming
+- Lemmatization & POS Tagging
+- Remove URLs 
+- Remove HTML Tags
+- Spelling Correction
+- Feature Extraction from Text Data
+    * Bag of Words
+    * TF-IDF
+    * Word Embeddings (Word2Vec, GloVe, FastText)
+- Named Entity Recognition
+- Data Augmentation for Text 
+    - Synonym Replacement
+    - Random Substitution
+    - Random Deletion
+    - Random Swap
+    - Back Translation
+    
+
+
+## Feature Extraction from Text Data
+Feature extraction from text data is a crucial step in text classification. The goal is to transform the text 
+into a numerical representation that can be used by machine learning algorithms. There are several techniques
+for feature extraction from text data, including:
+
+1.  `Bag-of-Words (BoW)`: This is a simple and widely used
+technique for feature extraction from text data. It represents each document as a bag, or a set
+of its word occurrences, without considering the order or context of the words. The BoW model is
+often used in conjunction with term frequency-inverse document frequency (TF-IDF) to reduce the
+dimensionality of the feature space and to down-weight the importance of common words.
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+bow = CountVectorizer(stop_words='english')
+bow.fit(text_data)
+```
+2.  `Term Frequency-Inverse Document Frequency (TF-IDF)`: This is a techniqu
+e that takes into account the importance of each word in a document and its rarity across the entire corpus
+. It is often used in conjunction with the BoW model to reduce the dimensionality of the featur
+space and to down-weight the importance of common words.
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+tfidf = TfidfVectorizer(stop_words='english')
+tfidf.fit(text_data)
+tfidf.vocabulary_
+```
+3.  `Word Embeddings`: This is a technique that represents words as vectors in a high
+dimensional space, such that semantically similar words are mapped to nearby points. Word embeddings
+can be used to capture the nuances of language and to improve the performance of text classification models.
+
+`Word Embedding using Glove`: GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus, and the resulting representations showcase interesting linear substructures of the word vector space.
+Download link: [Stanford's GloVe 100d word embeddings](https://www.kaggle.com/datasets/danielwillgeorge/glove6b100dtxt)
+
+4. `Word2vec`: The word2vec algorithm uses a neural network model to learn word associations from a large corpus of text. Once trained, such a model can detect synonymous words or suggest additional words for a partial sentence.
+```python
+from gensim.test.utils import common_texts
+from gensim.models import Word2Vec
+model = Word2Vec(common_texts, size=100, min_count=1)
+model.wv['graph']
+model.wv.most_similar('graph')
+```
+
+5. `Named Entity Recognition`: 
+Named Entity Recognition (NER) is a subtask of information extraction that involves identifying named entities in un
+structured text and categorizing them into predefined categories such as person, organization, location, date, tim
+e, money, percentage, etc.
+```python
+!pip install -U pip setuptools wheel
+!pip install -U spacy
+!pip -m spacy download en_core_web_sm
+
+import spacy
+from spacy import displacy
+```
+
+6. `Data Augmentation for Text`: 
+Data augmentation is a technique used to artificially increase the size of a dataset by applying transformations to the existing
+data.
+Uses:-
+- Increase the dataset size by creating more samples.
+- Reduce overfitting.
+- Imporve model generalization.
+- Handling imbalance dataset. 
+
+```python
+!pip install nlpaug
+!pip install sacremoses
+import nlpaug.augmenter.word as naw
+```
+
+7.  `Convolutional Neural Networks (CNNs)`: This is a type of neural
+network that can be used for feature extraction from text data. CNNs use convolutional and pooling layers
+to extract features from text data, and can be used to capture local patterns and relationships in the data.
+
+8.  `Recurrent Neural Networks (RNNs)`: This is a type of neural
+network that can be used for feature extraction from text data. RNNs use recurrent connections to captur
+e the temporal relationships in the data, and can be used to capture long-range dependencies in the data.
+
+9.  `Transformers`: This is a type of neural network that can be used for featur
+e extraction from text data. Transformers use self-attention mechanisms to capture the relationships between
+words in a sentence, and can be used to capture complex patterns and relationships in the data.
+
+10.  `Pre-trained Language Models`: This is a type of model that has been pre-trained
+on a large corpus of text data, and can be fine-tuned for specific text classification tasks.
 
 
