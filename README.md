@@ -14,17 +14,17 @@ Aim of NLP is to process text and speech to understand Human Language.
 * Chatbots & Virtual Assistants (Siri, Alexa)
 #### Techniques 
 * [Tokenization](#tokenization)
-* Stopword removal
+* [Stopword removal](#stopword-removal)
 * [Parts of Speech Tagging (POS)](#part-of-speech-tagging-pos)
 * [Stemming](#stemming)
 * [Lemmatization](#lemmatization)
 * [Feature Extraction from Text Data](#feature-extraction-from-text-data)
-* Bag of Words
-* TF/IDF
-* Spelling Correction
-* Word Embeddings
-* Named Entity Recognition
-* Data Augmentation
+* [Bag of Words](#bag-of-words)
+* [TF/IDF](#term-frequency-inverse-document-frequency-tf-idf)
+* [Spelling Correction](#spelling-correction)
+* [Word Embeddings](#word-embeddings)
+* [Named Entity Recognition](#named-entity-recognition)
+* [Data Augmentation](#data-augmentation-for-text)
 #### Tools and Libraries
 * NLTK
 * spaCy
@@ -100,6 +100,84 @@ from nltk import pos_tag
 pos_tag(['fighting'])
 #Output: [('fighting', 'VBG')]
 ```
+## Stopword Removal 
+Stopwords are the words which hold no importance in the text. They are the words like 'th
+is', 'is', 'a', 'an', 'the', etc. These words are ignored.
+
+```python
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+```
+
+## Bag of Words
+This is a simple and widely used
+technique for feature extraction from text data. It represents each document as a bag, or a set
+of its word occurrences, without considering the order or context of the words. The BoW model is
+often used in conjunction with term frequency-inverse document frequency (TF-IDF) to reduce the
+dimensionality of the feature space and to down-weight the importance of common words.
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+bow = CountVectorizer(stop_words='english')
+bow.fit(text_data)
+```
+
+## Term Frequency-Inverse Document Frequency (TF-IDF)
+ This is a techniqu
+e that takes into account the importance of each word in a document and its rarity across the entire corpus
+. It is often used in conjunction with the BoW model to reduce the dimensionality of the featur
+space and to down-weight the importance of common words.
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+tfidf = TfidfVectorizer(stop_words='english')
+tfidf.fit(text_data)
+tfidf.vocabulary_
+```
+
+## Spelling correction
+This is a technique that corrects the spelling of words in a text. It is often used in
+conjunction with other text preprocessing techniques to improve the accuracy of text classification models.
+```python
+from spellchecker import SpellChecker
+spell = SpellChecker()
+misspelled_text = spell.unknown(text.split())
+spell.correction(word)
+```
+
+## Word Embeddings
+This is a technique that represents words as vectors in a high
+dimensional space, such that semantically similar words are mapped to nearby points. Word embeddings
+can be used to capture the nuances of language and to improve the performance of text classification models.
+Using `Glove` or `Word2vec`.
+
+## Named Entity Recognition
+Named Entity Recognition (NER) is a subtask of information extraction that involves identifying named entities in un
+structured text and categorizing them into predefined categories such as person, organization, location, date, tim
+e, money, percentage, etc.
+```python
+!pip install -U pip setuptools wheel
+!pip install -U spacy
+!pip -m spacy download en_core_web_sm
+
+import spacy
+from spacy import displacy
+```
+
+## Data Augmentation for Text
+Data augmentation is a technique used to artificially increase the size of a dataset by applying transformations to the existing
+data.
+Uses:-
+- Increase the dataset size by creating more samples.
+- Reduce overfitting.
+- Imporve model generalization.
+- Handling imbalance dataset. 
+
+```python
+!pip install nlpaug
+!pip install sacremoses
+import nlpaug.augmenter.word as naw
+```
+
+
 
 ## Twitter Sentiments
 Twitter Sentiment analysis is a process of determining whether a tweet is positive or negative.
@@ -147,6 +225,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 bow = CountVectorizer(stop_words='english')
 bow.fit(text_data)
 ```
+
 2.  `Term Frequency-Inverse Document Frequency (TF-IDF)`: This is a techniqu
 e that takes into account the importance of each word in a document and its rarity across the entire corpus
 . It is often used in conjunction with the BoW model to reduce the dimensionality of the featur
@@ -157,6 +236,7 @@ tfidf = TfidfVectorizer(stop_words='english')
 tfidf.fit(text_data)
 tfidf.vocabulary_
 ```
+
 3.  `Word Embeddings`: This is a technique that represents words as vectors in a high
 dimensional space, such that semantically similar words are mapped to nearby points. Word embeddings
 can be used to capture the nuances of language and to improve the performance of text classification models.
