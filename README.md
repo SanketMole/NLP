@@ -18,10 +18,10 @@ Aim of NLP is to process text and speech to understand Human Language.
 * [Parts of Speech Tagging (POS)](#part-of-speech-tagging-pos)
 * [Stemming](#stemming)
 * [Lemmatization](#lemmatization)
-* Spelling Correction
 * [Feature Extraction from Text Data](#feature-extraction-from-text-data)
-* [Bag of Words]
-* [TF/IDF]
+* Bag of Words
+* TF/IDF
+* Spelling Correction
 * Word Embeddings
 * Named Entity Recognition
 * Data Augmentation
